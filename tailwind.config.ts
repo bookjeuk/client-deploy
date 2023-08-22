@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridAutoColumns: {
+        '2fr': 'minmax(0, 2fr)',
+      },
       colors: {
         'light-primary': 'rgba(161, 207, 221, 1)',
         'light-primary-2': ' rgba(208, 231, 238, 1)',

@@ -5,37 +5,49 @@ import OutlineButton from '@/components/source/Button/OutlineButton'
 import { Login } from '@/lib/auth/Login'
 import { Logout } from '@/lib/auth/Logout'
 import { postReview } from '@/lib/review/postReview'
+import { checkRoutePath } from '@/utils/routeUtils'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
+const styles = {
+  headerContainer: "w-4/5 h-218 my-4 mx-auto flex justify-between items-start",
+  buttonContainer: "h-full flex justify-end items-start",
+  button: "w-24 h-6 mx-2"
+}
+
 const Header = () => {
-  const styles = {
-    headerContainer: "w-4/5 h-24 my-4 mx-auto flex justify-between items-start",
-    buttonContainer: "h-full flex justify-end items-start",
-    button: "w-24 h-6 mx-2"
-  }
+  const pathname = usePathname();
+
   return (
     <header className={styles.headerContainer}>
       <Logo />
-      <div className={styles.buttonContainer}>
+      {checkRoutePath(pathname) && 
+      <div className={styles.buttonContainer}>        
         <div className={styles.button}>
           <OutlineButton 
             title='책 등록'
             onClick={postReview}
           />
         </div>
-        <div className={styles.button}>
+        <Link
+          href={'/login'}
+          className={styles.button}>
           <BasicButton
             title='로그인'
-            onClick={Login}
+            onClick={() => {}}
           />
-        </div>
-        <div className={styles.button}>
+        </Link>
+        <Link
+          href={'/signup'}
+          className={styles.button}>
           <BasicButton
             title='로그아웃'
-            onClick={Logout}
+            onClick={() => {}}
           />
-        </div>
+        </Link>
       </div>
+      }
     </header>
   )
 }
